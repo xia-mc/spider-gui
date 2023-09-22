@@ -1,2 +1,14 @@
-# spider-gui
-a toll for downloading web page from internet (study)
+爬虫工具 ver1.0  by xia__mc (20220922)
+目前仅在静态、仅HTML、无外置资源的网页上工作良好，仅能爬取HTML文件。
+
+
+已知问题：
+1.下载中的窗口不能被自动关闭。目前移除了自动关闭代码以允许手动关闭。
+2.不能爬取网页所包含的外置资源（无法解析HTML）。
+3.不能绕过部分网站的检测。
+
+事实上真正用来爬取的代码只有三行，难度大头都在GUI页面上
+但是GUI页面不是很酷吗（笑）
+
+本软件基于GPL-3.0协议发布，请遵守该协议
+开源地址: https://github.com/xia-mc/spider-gui
