@@ -105,20 +105,20 @@ def download_window():
 
     # 执行（最先进的一次）
     downloader: Future = web_downloader(url, web_encoding)  # 发布下载请求
-    waiting_thr = waiting_window()  # 发布等待窗口，返回任务future
-    while downloader.running():
-        if waiting_thr.running() is False:  # 用户关闭了等待窗口，代表取消操作
-            # 回收线程
-            downloader.cancel()  # 为什么不是shutdown: 代码缺陷，先妥协一下（
-            # waiting_pool.shutdown(False)  # 强制停止: 这里直接面向用户，妥协不了
-            return
-        pass
+    # waiting_thr = waiting_window()  # 发布等待窗口，返回任务future
+    # while downloader.running():
+    #     if waiting_thr.running() is False:  # 用户关闭了等待窗口，代表取消操作
+    #         # 回收线程
+    #         downloader.cancel()  # 为什么不是shutdown: 代码缺陷，先妥协一下（
+    #         # waiting_pool.shutdown(False)  # 强制停止: 这里直接面向用户，妥协不了
+    #         return
+    #     pass
     html: str = downloader.result()
 
     with open(filedir, "w", encoding=file_encoding) as file:  # 写入文件
         file.write(html)
 
-    # waiting_pool.shutdown(False)  # 要是一开始就知道，我可能会去用tkinter。我花了好久时间解决这个问题。
+    # waiting_pool.shutdown(False)  # 要是一开始就知道，我可能会去用tkinter。我花了好久时间解决这个问题。（还没有解决）
 
     # 汇报结果
     gui.msgbox(
@@ -137,11 +137,11 @@ def setting_window():
 
 def about_window():
     message = "\n" \
-                    "爬虫工具 ver1.0  by xia__mc (20220922)\n" \
+                    "爬虫工具 ver1.0.1  by xia__mc (20220922b)\n" \
                     "目前仅在静态、仅HTML、无外置资源的网页上工作良好，仅能爬取HTML文件。\n" \
                     "\n\n\n" \
                     "已知问题：\n" \
-                    "1.下载中的窗口不能被自动关闭。目前移除了自动关闭代码以允许手动关闭。\n" \
+                    "1.下载中的窗口不能被自动关闭。目前移除了整个等待窗口。\n" \
                     "2.不能爬取网页所包含的外置资源（无法解析HTML）。\n" \
                     "3.不能绕过部分网站的检测。" \
                     "\n\n" \
